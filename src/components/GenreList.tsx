@@ -1,8 +1,22 @@
-import useGenres from "@/hooks/useGenres";
+import useGenres, { Genre } from "@/hooks/useGenres";
 import getUrlWithInsertedText from "@/services/image-url";
-import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Image,
+  Link,
+  List,
+  ListItem,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 
-const GenreList = () => {
+//Notify the parent component (App.tsx) when a genre is selected
+interface Props {
+  onSelectGenre: (genre: Genre) => void;
+}
+
+const GenreList = ({ onSelectGenre }: Props) => {
   const { data, loading, error } = useGenres();
   return (
     <>
@@ -21,7 +35,9 @@ const GenreList = () => {
                   "crop/600/400/"
                 )}
               />
-              <Text fontSize="lg">{genre.name}</Text>
+              <Link onClick={() => onSelectGenre(genre)} fontSize="lg">
+                {genre.name}
+              </Link>
             </HStack>
           </ListItem>
         ))}
