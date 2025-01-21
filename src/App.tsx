@@ -22,7 +22,10 @@ function App() {
 
       <GridItem area="aside" hideBelow="lg" paddingX="10px">
         {/* Pass a function for the GenreList component to notify the parent component when a genre is selected */}
-        <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
+        <GenreList
+          onSelectGenre={(genre) => setSelectedGenre(genre)}
+          selectedGenre={selectedGenre}
+        />
       </GridItem>
 
       <GridItem area="main">

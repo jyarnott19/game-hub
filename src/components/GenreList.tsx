@@ -14,9 +14,10 @@ import {
 //Notify the parent component (App.tsx) when a genre is selected
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, loading, error } = useGenres();
   return (
     <>
@@ -35,7 +36,11 @@ const GenreList = ({ onSelectGenre }: Props) => {
                   "crop/600/400/"
                 )}
               />
-              <Link onClick={() => onSelectGenre(genre)} fontSize="lg">
+              <Link
+                onClick={() => onSelectGenre(genre)}
+                fontSize="lg"
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+              >
                 {genre.name}
               </Link>
             </HStack>
