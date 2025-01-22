@@ -1,4 +1,5 @@
-import usePlatforms, { Platform } from "@/hooks/usePlatforms";
+import { Platform } from "@/hooks/useGames";
+import usePlatforms from "@/hooks/usePlatforms";
 import {
   MenuRoot,
   MenuTrigger,
@@ -8,20 +9,31 @@ import {
 } from "@chakra-ui/react";
 import { LuChevronDown } from "react-icons/lu";
 
-const PlatformSelector = () => {
+interface Props {
+  onSelectPlatform: (platform: Platform) => void;
+  selectedPlatform: Platform | null;
+}
+const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
   const { data, error, loading } = usePlatforms();
   if (error) return null;
   return (
     <MenuRoot>
       <MenuTrigger asChild>
         <Button variant="outline">
-          Platforms <LuChevronDown />
+          {selectedPlatform?.name || "Platforms"}
+          <LuChevronDown />
         </Button>
       </MenuTrigger>
       <MenuContent>
         {loading && <MenuItem value="">Loading...</MenuItem>}
         {data.map((platform: Platform) => (
-          <MenuItem value={platform.slug}>{platform.name}</MenuItem>
+          <MenuItem
+            key={platform.id}
+            value={platform.slug}
+            onClick={() => onSelectPlatform(platform)}
+          >
+            {platform.name}
+          </MenuItem>
         ))}
       </MenuContent>
     </MenuRoot>
