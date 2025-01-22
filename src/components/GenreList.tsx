@@ -10,6 +10,7 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
+import { color } from "framer-motion";
 
 //Notify the parent component (App.tsx) when a genre is selected
 interface Props {
@@ -40,6 +41,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
                 onClick={() => onSelectGenre(genre)}
                 fontSize="lg"
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                color={genre.id === selectedGenre?.id ? "blue" : ""}
               >
                 {genre.name}
               </Link>
