@@ -7,8 +7,18 @@ import {
 } from "@chakra-ui/react/menu";
 
 import { LuChevronDown } from "react-icons/lu";
-
-const SortSelector = () => {
+const sortOrders = [
+  { value: "", label: "Relevance" },
+  { value: "-added", label: "Date Added" },
+  { value: "name", label: "Name" },
+  { value: "-released", label: "Release Date" },
+  { value: "-metacritic", label: "Popularity" },
+  { value: "-rating", label: "Average Rating" },
+];
+interface Props {
+  onSelectSort: (sort: string) => void;
+}
+const SortSelector = ({ onSelectSort }: Props) => {
   return (
     <MenuRoot>
       <MenuTrigger asChild>
@@ -18,22 +28,15 @@ const SortSelector = () => {
         </Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuItem value="">Relevance</MenuItem>
-        <MenuItem value="added">Date Added</MenuItem>
-        <MenuItem value="name">Name</MenuItem>
-        <MenuItem value="released">Release Date</MenuItem>
-        <MenuItem value="metacritic">Metacritic Rating</MenuItem>
-        <MenuItem value="rating">Average Rating</MenuItem>
-        {/* {loading && <MenuItem value="">Loading...</MenuItem>}
-          {data.map((platform: Platform) => ( }
-            <MenuItem
-              key={platform.id}
-              value={platform.slug}
-              onClick={() => onSelectPlatform(platform)}
-            >
-              {platform.name}
-            </MenuItem>
-          ))} */}
+        {sortOrders.map((sortOrder) => (
+          <MenuItem
+            onClick={() => onSelectSort(sortOrder.value)}
+            key={sortOrder.value}
+            value={sortOrder.value}
+          >
+            {sortOrder.label}
+          </MenuItem>
+        ))}
       </MenuContent>
     </MenuRoot>
   );

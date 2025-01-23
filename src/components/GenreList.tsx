@@ -1,16 +1,6 @@
 import useGenres, { Genre } from "@/hooks/useGenres";
 import getUrlWithInsertedText from "@/services/image-url";
-import {
-  Button,
-  HStack,
-  Image,
-  Link,
-  List,
-  ListItem,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import { color } from "framer-motion";
+import { HStack, Image, Link, List, ListItem, Spinner } from "@chakra-ui/react";
 
 //Notify the parent component (App.tsx) when a genre is selected
 interface Props {

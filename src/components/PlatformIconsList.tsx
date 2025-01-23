@@ -11,7 +11,7 @@ import {
   FaXbox,
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
-import { SiNintendoswitch } from "react-icons/si";
+import { SiAtari, SiCommodore, SiNintendoswitch, SiSega } from "react-icons/si";
 
 interface Props {
   platforms: Platform[];
@@ -27,12 +27,25 @@ const PlatformIconsList = ({ platforms }: Props) => {
     ios: MdPhoneIphone,
     android: FaAndroid,
     web: BsGlobe,
+    sega: SiSega,
+    atari: SiAtari,
+    "commodore-amiga": SiCommodore,
   };
+
   return (
     <HStack marginY={2}>
-      {platforms.map((platform) => (
-        <Icon key={platform.id} as={iconMap[platform.slug]} color="gray.500" />
-      ))}
+      {platforms.map(
+        (platform) => (
+          console.log(platform),
+          (
+            <Icon
+              key={platform.id}
+              as={iconMap[platform.slug]}
+              color="gray.500"
+            />
+          )
+        )
+      )}
     </HStack>
   );
 };

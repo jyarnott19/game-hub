@@ -1,10 +1,8 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useGames, { Platform } from "@/hooks/useGames";
+import useGames from "@/hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { Genre } from "@/hooks/useGenres";
-import { select } from "framer-motion/client";
 import { GameQuery } from "@/App";
 
 //When the selected genre changes, the GameGrid component will fetch the games for that genre
@@ -30,11 +28,16 @@ const GameGrid = ({ gameQuery }: Props) => {
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {data.map((game) => (
-          <GameCardContainer key={game.id}>
-            <GameCard game={game} />
-          </GameCardContainer>
-        ))}
+        {data.map(
+          (game) => (
+            console.log(game.name),
+            (
+              <GameCardContainer key={game.id}>
+                <GameCard game={game} />
+              </GameCardContainer>
+            )
+          )
+        )}
       </SimpleGrid>
     </>
   );
